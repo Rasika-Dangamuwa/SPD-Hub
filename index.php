@@ -1,30 +1,29 @@
 <?php
 session_start();
-if (isset($_SESSION["user_id"])) {
-    header("Location: dashboard.php");
+if (isset($_SESSION['user_role'])) {
+    switch ($_SESSION['user_role']) {
+        case 'admin':
+            header("Location: /SPD-Hub/admin_dashboard.php");
+            break;
+        case 'hod':
+            header("Location: /SPD-Hub/hod_dashboard.php");
+            break;
+        case 'admin_manager':
+            header("Location: /SPD-Hub/admin_manager_dashboard.php");
+            break;
+        case 'brand_manager':
+            header("Location: /SPD-Hub/brand_promotion_dashboard.php");
+            break;
+        case 'propagandist':
+            header("Location: /SPD-Hub/propagandist_dashboard.php");
+            break;
+        default:
+            header("Location: /SPD-Hub/login.php");
+            break;
+    }
+    exit();
+} else {
+    header("Location: /SPD-Hub/login.php");
     exit();
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPD Hub - Login</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="login-container">
-        <h2>SPD Hub Login</h2>
-        <form id="loginForm">
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <p id="error-message"></p>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
