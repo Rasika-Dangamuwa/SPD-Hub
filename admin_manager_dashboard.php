@@ -1,11 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin_manager') {
-    header("Location: login.php");
+if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin_manager') {
+    header("Location: index.php");
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +13,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin_manager') {
 </head>
 <body>
     <h1>Welcome, Admin Manager!</h1>
-    <p>This is your dashboard where you can manage administrative tasks.</p>
+    <p>This is the Admin Manager dashboard.</p>
 </body>
 </html>

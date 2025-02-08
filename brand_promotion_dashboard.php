@@ -1,11 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'brand_promotion_manager') {
-    header("Location: login.php");
+if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'brand_manager') {
+    header("Location: index.php");
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +13,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'brand_promotion_manager'
 </head>
 <body>
     <h1>Welcome, Brand Promotion Manager!</h1>
-    <p>Manage brand promotions and track events here.</p>
+    <p>This is the Brand Promotion Manager dashboard.</p>
 </body>
 </html>
