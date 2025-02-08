@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Start Premium Shuffle</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Start Premium Shuffle</h2>
+    <form method="POST">
+        <label>Select Event:</label>
+        <select name="event_id" required>
+            <?php while ($event = $events->fetch_assoc()): ?>
+                <option value="<?php echo $event["event_id"]; ?>">
+                    <?php echo htmlspecialchars($event["event_name"]) . " - " . $event["event_date"]; ?>
+                </option>
+            <?php endwhile; ?>
+        </select>
+
+        <label>Select Breakdown:</label>
+        <select name="breakdown_id" required>
+            <?php while ($breakdown = $breakdowns->fetch_assoc()): ?>
+                <option value="<?php echo $breakdown["breakdown_id"]; ?>">
+                    <?php echo htmlspecialchars($breakdown["breakdown_name"]) . " - " . $breakdown["flap_count"] . " Flaps"; ?>
+                </option>
+            <?php endwhile; ?>
+        </select>
+
+        <label>Flaps Achieved:</label>
+        <input type="number" name="flaps_count" required>
+
+        <button type="submit">Start Shuffle</button>
+    </form>
+</body>
+</html>
