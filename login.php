@@ -16,38 +16,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->fetch();
 
         if (password_verify($password, $password_hash)) {
-            // Set session variables
             $_SESSION['user_id'] = $user_id;
             $_SESSION['user_role'] = $role;
 
-            // Role-based redirection with correct paths
             switch ($role) {
                 case 'admin':
-                    header("Location: /SPD_Hub/admin_dashboard.php");
+                    header("Location: /SPD-Hub/admin_dashboard.php");
                     break;
                 case 'hod':
-                    header("Location: /SPD_Hub/hod_dashboard.php");
+                    header("Location: /SPD-Hub/hod_dashboard.php");
                     break;
                 case 'admin_manager':
-                    header("Location: /SPD_Hub/admin_manager_dashboard.php");
+                    header("Location: /SPD-Hub/admin_manager_dashboard.php");
                     break;
                 case 'brand_manager':
-                    header("Location: /SPD_Hub/brand_promotion_dashboard.php");
+                    header("Location: /SPD-Hub/brand_promotion_dashboard.php");
                     break;
                 case 'propagandist':
-                    header("Location: /SPD_Hub/propagandist_dashboard.php");
+                    header("Location: /SPD-Hub/propagandist_dashboard.php");
                     break;
                 default:
-                    header("Location: /SPD_Hub/login.php?error=invalid_role");
+                    header("Location: /SPD-Hub/login.php?error=invalid_role");
                     break;
             }
             exit();
         } else {
-            header("Location: /SPD_Hub/login.php?error=invalid_credentials");
+            header("Location: /SPD-Hub/login.php?error=invalid_credentials");
             exit();
         }
     } else {
-        header("Location: /SPD_Hub/login.php?error=invalid_credentials");
+        header("Location: /SPD-Hub/login.php?error=invalid_credentials");
         exit();
     }
 }
