@@ -1,14 +1,13 @@
-<?php
 session_start();
-include('db_connect.php'); // Ensure this file is correctly set up
+include('db_connect.php'); // Ensure database connection
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Fetch user from database
-    $stmt = $conn->prepare("SELECT id, password_hash, role FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
+    // Fetch user credentials
+    $stmt = $conn->prepare("SELECT user_id, password_hash, role FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->store_result();
 
@@ -16,44 +15,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_result($user_id, $password_hash, $role);
         $stmt->fetch();
 
-        // Verify password
         if (password_verify($password, $password_hash)) {
             // Set session variables
             $_SESSION['user_id'] = $user_id;
-            $_SESSION['username'] = $username;
-            $_SESSION['role'] = $role;
+            $_SESSION['user_role'] = $role;
 
-            // Redirect user based on role
+            // Role-based redirection with correct paths
             switch ($role) {
-                case 'system_admin':
-                    header("Location: system_admin_dashboard.php");
+                case 'admin':
+                    header("Location: /SPD_Hub/admin_dashboard.php");
                     break;
                 case 'hod':
-                    header("Location: hod_dashboard.php");
+                    header("Location: /SPD_Hub/hod_dashboard.php");
                     break;
                 case 'admin_manager':
-                    header("Location: admin_manager_dashboard.php");
+                    header("Location: /SPD_Hub/admin_manager_dashboard.php");
                     break;
-                case 'brand_promotion_manager':
-                    header("Location: brand_promotion_dashboard.php");
+                case 'brand_manager':
+                    header("Location: /SPD_Hub/brand_promotion_dashboard.php");
                     break;
                 case 'propagandist':
-                    header("Location: propagandist_dashboard.php");
+                    header("Location: /SPD_Hub/propagandist_dashboard.php");
                     break;
                 default:
-                    header("Location: login.php?error=invalid_role");
+                    header("Location: /SPD_Hub/login.php?error=invalid_role");
                     break;
             }
             exit();
         } else {
-            // Invalid password
-            header("Location: login.php?error=invalid_credentials");
+            header("Location: /SPD_Hub/login.php?error=invalid_credentials");
             exit();
         }
     } else {
-        // User not found
-        header("Location: login.php?error=invalid_credentials");
+        header("Location: /SPD_Hub/login.php?error=invalid_credentials");
         exit();
     }
 }
-?>
