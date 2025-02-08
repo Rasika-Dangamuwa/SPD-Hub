@@ -5,14 +5,18 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin_manager'
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Admin Manager Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Welcome, Admin Manager!</h1>
-    <p>This is the Admin Manager dashboard.</p>
+
+    <a href="logout.php"><button>Logout</button></a>
+    <a href="upload_sampling_request.php"><button>Upload Sampling Request Letter</button></a>
 </body>
 </html>
