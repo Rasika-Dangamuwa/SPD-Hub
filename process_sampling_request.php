@@ -64,7 +64,7 @@ function ocr_extract_text($file_path) {
 function translate_to_english($text) {
     global $client;
     $response = $client->completions()->create([
-        'model' => 'gpt-4-turbo', // Use updated model
+        'model' => 'gpt-3.5-turbo', // Use updated model
         'prompt' => "Translate this to English: $text",
         'max_tokens' => 100,
     ]);
@@ -75,7 +75,7 @@ function translate_to_english($text) {
 function extract_event_details($text) {
     global $client;
     $response = $client->completions()->create([
-        'model' => 'gpt-4-turbo', // Use updated model
+        'model' => 'gpt-3.5-turbo', // Use updated model
         'prompt' => "Extract event details from this text:\n\n$text\n\nProvide output as JSON with fields: event_name, event_date, event_time, event_duration, sampling_count, contact_person, contact_phone.",
         'max_tokens' => 150,
     ]);
